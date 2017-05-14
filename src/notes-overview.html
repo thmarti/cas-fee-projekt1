@@ -3,24 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <title>Note Pro</title>
+    <link href="style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 </head>
-<body>
+<body class="black-and-white">
 <nav>
+    <section>
     <button>Create new Note</button>
-    <select>
-        <option value="bw">Black & White Style</option>
-        <option value="color">Color Style</option>
-    </select>
+        <select id="style-selector" name="style"
+                onchange="var body = $('body'); body.removeClass(); body.addClass($('#style-selector')[0].value)">
+            <option value="black-and-white">Black & White Style</option>
+            <option value="white-and-black">White & Black Style</option>
+        </select>
+    </section>
 </nav>
 
 <main>
-    <form>
-        <input type="radio">By importance
-        <input type="radio">By finish date
-        <input type="radio">By created date
-    </form>
+    <section>
+        <form class="button-group">
+            <input id="sort-by-importance" type="radio" name="sort-by" checked>
+            <label for="sort-by-importance" class="button">By importance</label>
+            <input id="sort-by-finish-date" type="radio" name="sort-by">
+            <label for="sort-by-finish-date" class="button">By finish date</label>
+            <input id="sort-by-create-date" type="radio" name="sort-by">
+            <label for="sort-by-create-date" class="button">By created date</label>
+        </form>
+    </section>
 
-    <input type="checkbox">Show finished
+    <section>
+        <input id="show-finished" type="checkbox" name="show-finished" class="button">
+        <label for="show-finished" class="button">Show finished</label>
+    </section>
+
 
 </main>
 </body>
