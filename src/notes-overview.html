@@ -3,24 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Note Pro</title>
+    <link href="reset.css" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
-<body class="black-and-white">
-<nav>
-    <section>
-    <button>Create new Note</button>
-        <select id="style-selector" name="style"
+<body class="white-and-black" style="display: block;">
+
+<header style="display: flex;">
+    <section style="display: flex;flex: 1;">
+        <button style="flex: 1;">Create new Note</button>
+        <select id="style-selector" name="style"  style="flex: 1;"
                 onchange="var body = $('body'); body.removeClass(); body.addClass($('#style-selector')[0].value)">
             <option value="black-and-white">Black & White Style</option>
             <option value="white-and-black">White & Black Style</option>
         </select>
     </section>
-</nav>
 
-<main>
-    <section>
+    <section style="display: flex;flex: 1;">
         <form class="button-group">
             <input id="sort-by-importance" type="radio" name="sort-by" checked>
             <label for="sort-by-importance" class="button">By importance</label>
@@ -29,14 +31,43 @@
             <input id="sort-by-create-date" type="radio" name="sort-by">
             <label for="sort-by-create-date" class="button">By created date</label>
         </form>
-    </section>
 
-    <section>
         <input id="show-finished" type="checkbox" name="show-finished" class="button">
         <label for="show-finished" class="button">Show finished</label>
     </section>
+</header>
 
+<main style="flex: 1; overflow: auto">
+    <ol class="todo-list">
+        <li style="display: flex;">
+            <div style="flex-basis: 30%; flex-grow: 1;">
+                Nächsten Mittwoch
+            </div>
+            <div style="flex-basis: 60%; flex-grow: 2;">
+                CAS FEE Selbststudium / Projekt Aufgabe erledigen
+            </div>
+            <div style="min-width: 5em; flex-grow: 0;">
+                <i class="fa fa-bolt"></i>
+                <i class="fa fa-bolt"></i>
+                <i class="fa fa-bolt" style="color: var(--button-bg-color)"></i>
+                <i class="fa fa-bolt" style="color: var(--button-bg-color)"></i>
+                <i class="fa fa-bolt" style="color: var(--button-bg-color)"></i>
+            </div>
+            <div style="flex-basis: 10%; flex-grow: 0;">
+                <button>Edit</button>
+            </div>
+            <div>
+                <i class="fa fa-check-square-o"></i> Finished [Today]
+            </div>
+            <div>
+                <textarea readonly>HTML für die note App erstellen.
+CSS erstellen für die note App.</textarea>
+            </div>
+        </li>
+
+    </ol>
 
 </main>
+
 </body>
 </html>
