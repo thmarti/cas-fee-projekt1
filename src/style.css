@@ -22,6 +22,26 @@ body.white-and-black {
     outline: none;
 }
 
+@media screen and (max-width: 799px) {
+    .note-entry {
+        flex-direction: column;
+    }
+}
+
+@media screen and (min-width: 800px) {
+    .finished-section {
+        order: 1;
+    }
+
+    .note-section {
+        order: 2;
+    }
+
+    .edit-section {
+        order: 3;
+    }
+}
+
 section {
     margin-top: 1em;
 }

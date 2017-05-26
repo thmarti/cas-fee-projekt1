@@ -56,10 +56,10 @@
 <main style="flex: 1; overflow: auto">
     <ol class="todo-list">
         <li class="flex-container" style="flex-direction:column; align-items: stretch;">
-            <article class="flex-container" style="justify-content: space-between; align-items: center">
-                <section class="flex-container"
-                         style="order: 2; flex-basis: 60%; flex-grow: 2; flex-direction: column;">
-                    <div class="flex-container" style="justify-content: space-between; margin-left: 0;">
+            <article class="flex-container note-entry"
+                     style="justify-content: space-between;align-items: stretch;align-content: center;flex-wrap: wrap;">
+                <section class="flex-container note-section" style="flex-basis: 60%;flex-grow: 2;flex-direction: column;">
+                    <div class="flex-container" style="justify-content: space-between;margin: 0 0 1em 0;">
                         <h1 style="">
                             CAS FEE Selbststudium / Projekt Aufgabe erledigen
                         </h1>
@@ -75,8 +75,8 @@
 CSS erstellen für die note App.</textarea>
                 </section>
 
-                <section style="order: 1;">
-                    <div style="flex-basis: 30%; flex-grow: 1;">
+                <section class="flex-container finished-section" style="flex-direction: column;flex-grow: 1;">
+                    <div style="margin-bottom: 1em;">
                         Nächsten Mittwoch
                     </div>
                     <div>
@@ -84,14 +84,12 @@ CSS erstellen für die note App.</textarea>
                     </div>
                 </section>
 
-                <div style="flex-basis: 10%; flex-grow: 0; order: 3; ">
+                <div class="edit-section" style="flex-basis: 10%; flex-grow: 0;">
                     <button>Edit</button>
                 </div>
             </article>
         </li>
-
     </ol>
-
 </main>
 
 </body>
