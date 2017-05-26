@@ -12,57 +12,82 @@
 </head>
 <body class="white-and-black" style="display: block;">
 
-<header style="display: flex;">
-    <section style="display: flex;flex: 1;">
-        <button style="flex: 1;">Create new Note</button>
-        <select id="style-selector" name="style"  style="flex: 1;"
+<header class="flex-container" style="flex-direction: column; ">
+    <section class="flex-container" style="justify-content: space-between;">
+        <button style="">Create new Note</button>
+        <select id="style-selector" name="style" style=""
                 onchange="var body = $('body'); body.removeClass(); body.addClass($('#style-selector')[0].value)">
             <option value="black-and-white">Black & White Style</option>
-            <option value="white-and-black">White & Black Style</option>
+            <option value="white-and-black" selected>White & Black Style</option>
         </select>
     </section>
 
-    <section style="display: flex;flex: 1;">
+    <section class="flex-container" style="justify-content: space-between;">
         <form class="button-group">
             <input id="sort-by-importance" type="radio" name="sort-by" checked>
-            <label for="sort-by-importance" class="button">By importance</label>
+            <label for="sort-by-importance" class="button">
+                <i class="fa fa-circle-o icon-unchecked"></i>
+                <i class="fa fa-check-circle-o icon-checked"></i>
+                By importance
+            </label>
             <input id="sort-by-finish-date" type="radio" name="sort-by">
-            <label for="sort-by-finish-date" class="button">By finish date</label>
+            <label for="sort-by-finish-date" class="button">
+                <i class="fa fa-circle-o icon-unchecked"></i>
+                <i class="fa fa-check-circle-o icon-checked"></i>
+                By finish date
+            </label>
             <input id="sort-by-create-date" type="radio" name="sort-by">
-            <label for="sort-by-create-date" class="button">By created date</label>
+            <label for="sort-by-create-date" class="button">
+                <i class="fa fa-circle-o icon-unchecked"></i>
+                <i class="fa fa-check-circle-o icon-checked"></i>
+                By created date
+            </label>
         </form>
 
         <input id="show-finished" type="checkbox" name="show-finished" class="button">
-        <label for="show-finished" class="button">Show finished</label>
+        <label for="show-finished" class="button">
+            <i class="fa fa-square-o icon-unchecked"></i>
+            <i class="fa fa-check-square-o icon-checked"></i>
+            Show finished
+        </label>
     </section>
 </header>
 
 <main style="flex: 1; overflow: auto">
     <ol class="todo-list">
-        <li style="display: flex;">
-            <div style="flex-basis: 30%; flex-grow: 1;">
-                Nächsten Mittwoch
-            </div>
-            <div style="flex-basis: 60%; flex-grow: 2;">
-                CAS FEE Selbststudium / Projekt Aufgabe erledigen
-            </div>
-            <div style="min-width: 5em; flex-grow: 0;">
-                <i class="fa fa-bolt"></i>
-                <i class="fa fa-bolt"></i>
-                <i class="fa fa-bolt" style="color: var(--button-bg-color)"></i>
-                <i class="fa fa-bolt" style="color: var(--button-bg-color)"></i>
-                <i class="fa fa-bolt" style="color: var(--button-bg-color)"></i>
-            </div>
-            <div style="flex-basis: 10%; flex-grow: 0;">
-                <button>Edit</button>
-            </div>
-            <div>
-                <i class="fa fa-check-square-o"></i> Finished [Today]
-            </div>
-            <div>
-                <textarea readonly>HTML für die note App erstellen.
+        <li class="flex-container" style="flex-direction:column; align-items: stretch;">
+            <article class="flex-container" style="justify-content: space-between; align-items: center">
+                <section class="flex-container"
+                         style="order: 2; flex-basis: 60%; flex-grow: 2; flex-direction: column;">
+                    <div class="flex-container" style="justify-content: space-between; margin-left: 0;">
+                        <h1 style="">
+                            CAS FEE Selbststudium / Projekt Aufgabe erledigen
+                        </h1>
+                        <div style="min-width: 5em; flex-grow: 0;">
+                            <i class="fa fa-bolt"></i>
+                            <i class="fa fa-bolt"></i>
+                            <i class="fa fa-bolt" style="color: var(--button-bg-color)"></i>
+                            <i class="fa fa-bolt" style="color: var(--button-bg-color)"></i>
+                            <i class="fa fa-bolt" style="color: var(--button-bg-color)"></i>
+                        </div>
+                    </div>
+                    <textarea readonly rows="10">HTML für die note App erstellen.
 CSS erstellen für die note App.</textarea>
-            </div>
+                </section>
+
+                <section style="order: 1;">
+                    <div style="flex-basis: 30%; flex-grow: 1;">
+                        Nächsten Mittwoch
+                    </div>
+                    <div>
+                        <i class="fa fa-check-square-o"></i> Finished [Today]
+                    </div>
+                </section>
+
+                <div style="flex-basis: 10%; flex-grow: 0; order: 3; ">
+                    <button>Edit</button>
+                </div>
+            </article>
         </li>
 
     </ol>
