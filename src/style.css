@@ -1,5 +1,6 @@
 body {
     font-family: 'Roboto', 'Arial', sans-serif;
+    font-size: 16pt;
     background-color: rgb(var(--bg-color));
     color: rgb(var(--front-color));
 }
@@ -22,13 +23,13 @@ body.white-and-black {
     outline: none;
 }
 
-@media screen and (max-width: 799px) {
+@media screen and (max-width: 999px) {
     .note-entry {
         flex-direction: column;
     }
 }
 
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 1000px) {
     .finished-section {
         order: 1;
     }
@@ -71,7 +72,7 @@ button {
     border-radius: 2px;
     letter-spacing: .5px;
     line-height: 2em;
-    font-size: 16px;
+    font-size: 14pt;
     box-shadow: 0 2px 2px 0 rgba(var(--front-color), 0.14), 0 1px 5px 0 rgba(var(--front-color), 0.12), 0 3px 1px -2px rgba(var(--front-color), 0.2);
 }
 
@@ -111,4 +112,8 @@ input + label .icon-unchecked {
 input:checked + label .icon-unchecked,
 input + label .icon-checked {
     display: none;
+}
+
+h1 {
+    font-weight: bold;
 }
