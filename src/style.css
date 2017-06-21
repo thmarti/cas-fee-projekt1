@@ -27,6 +27,8 @@ body.white-and-black {
     outline: none;
 }
 
+/* @media only screen and (min-resolution: 120dpi) */
+
 @media screen and (max-width: 999px) {
     .note-entry {
         flex-direction: column;
