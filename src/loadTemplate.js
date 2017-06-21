@@ -1,3 +1,35 @@
+class TemplateLoader {
+    constructor(element, template, data){
+        if(typeof element === 'string'){
+            this.el = document.getElementById(element);
+        } else {
+            this.el = element;
+        }
+
+        this.templateName = template;
+        this.data = data || null;
+    }
+
+    create(data){
+        this.data = data || this.data;
+
+        let request = new XMLHttpRequest();
+        request.open('get', 'templates/' + this.templateName + '.handlebars', true);
+
+        request.onreadystatechange = function(){
+            if (request.readyState === 4 && request.status === 200){
+                //Compile HB template, add data (if defined) and place in parent element.
+                let compiled = Handlebars.compile(request.response);
+                this.el.innerHTML = compiled(this.data);
+            }
+        };
+
+        // Send request.
+        request.send();
+    }
+}
+
+
 const LoadTemplate = function(element, template, data){
     // Check if parenet element is defined as string or object.
     if(typeof element === 'string'){
@@ -7,7 +39,7 @@ const LoadTemplate = function(element, template, data){
     }
 
     // Store template name and data.
-    this.tempName = template;
+    this.templateName = template;
     this.data = data || null;
 
     // You can change this to path of your template folder.
@@ -19,7 +51,7 @@ LoadTemplate.prototype.create = function(callback){
     let that = this;
 
     // Define parameters for request.
-    req.open('get', this.folderPath + this.tempName + '.handlebars', true);
+    req.open('get', this.folderPath + this.templateName + '.handlebars', true);
 
     // Wait for request to complete.
     req.onreadystatechange = function(){
@@ -43,7 +75,7 @@ LoadTemplate.prototype.createAndWait = function(callback){
     let that = this;
 
     // Define parameters for request.
-    req.open('get', this.folderPath + this.tempName + '.handlebars', true);
+    req.open('get', this.folderPath + this.templateName + '.handlebars', true);
 
     // Wait for request to complete.
     req.onreadystatechange = function(){

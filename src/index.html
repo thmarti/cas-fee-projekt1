@@ -11,7 +11,15 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pouchdb/6.2.0/pouchdb.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.min.js"></script>
-  <script src="https://raw.github.com/badsyntax/handlebars-form-helpers/master/dist/handlebars.form-helpers.min.js"></script>
+  <script
+      src="https://raw.github.com/badsyntax/handlebars-form-helpers/master/dist/handlebars.form-helpers.min.js"></script>
+
+  <!--
+  $.get('templates/products.hbs', function (data) {
+      var template=Handlebars.compile(data);
+      $(target).html(template(jsonData));
+  }, 'html')
+  -->
 
   <link href="reset.css" rel="stylesheet">
   <link href="style.css" rel="stylesheet">
@@ -24,7 +32,7 @@
   <section class="flex-container" style="justify-content: space-between;">
     <button style="">Create new Note</button>
     <select id="style-selector" name="style" style=""
-            onchange="var body = $('body'); body.removeClass(); body.addClass($('#style-selector')[0].value)">
+            onchange="let body = $('body'); body.removeClass(); body.addClass($('#style-selector')[0].value)">
       <option value="black-and-white">Black & White Style</option>
       <option value="white-and-black" selected>White & Black Style</option>
     </select>
@@ -75,69 +83,73 @@
     <label>Beschreibung</label>
     <textarea class="input-control" rows="10">HTML für die note App erstellen.
 CSS erstellen für die note App.</textarea>
+  </div>
+
+  <div class="form-group">
+    <label>Wichtigkeit</label>
+    <!-- Mit Radio Buttons und :selected lösen -->
+    <div style="min-width: 5em; flex-grow: 0;">
+      <i class="fa fa-bolt"></i>
+      <i class="fa fa-bolt"></i>
+      <i class="fa fa-bolt" style="color: var(--button-bg-color)"></i>
+      <i class="fa fa-bolt" style="color: var(--button-bg-color)"></i>
+      <i class="fa fa-bolt" style="color: var(--button-bg-color)"></i>
     </div>
+  </div>
 
-    <div class="form-group">
-      <label>Wichtigkeit</label>
-      <div style="min-width: 5em; flex-grow: 0;">
-        <i class="fa fa-bolt"></i>
-        <i class="fa fa-bolt"></i>
-        <i class="fa fa-bolt" style="color: var(--button-bg-color)"></i>
-        <i class="fa fa-bolt" style="color: var(--button-bg-color)"></i>
-        <i class="fa fa-bolt" style="color: var(--button-bg-color)"></i>
-      </div>
-    </div>
+  <div class="form-group">
+    <label>&nbsp;</label>
+    <button>Save</button>
+    <button>Cancel</button>
+  </div>
+</main>
 
-    <div class="form-group">
-      <label>&nbsp;</label>
-      <button>Save</button>
-      <button>Cancel</button>
-    </div>
-  </main>
+<button onclick="initDb()">Fill DB</button>
 
-  <button onclick="initDb()">Fill DB</button>
+<script>
+    'use strict';
+    const mainContainerID = "main-container";
+    const db = new PouchDB('notes');
+    showNotesOverview();
 
-  <script>
-      'use strict';
+    function showNotesOverview() {
+        db.allDocs({include_docs: true, descending: true}, function (err, doc) {
+            new LoadTemplate(mainContainerID, "notes-overview", {notes: _.map(doc.rows, "doc")}).create(() => {
+            });
+        });
+    }
 
-      const mainContainerID = "main-container";
-      const db = new PouchDB('notes');
-      showNotesOverview();
+    function showNote() {
 
-      function showNotesOverview() {
-          db.allDocs({include_docs: true, descending: true}, function (err, doc) {
-              new LoadTemplate(mainContainerID, "notes-overview", {notes: _.map(doc.rows, "doc")}).create(() => {
-              });
-          });
-      }
+    }
 
-      function showNote() {
+    function initDb() {
+        let note1 = {
+            title: "Dies mein Titel",
+            description: "Mein schöne Beschreibung",
+            creationDate: new Date()
+        };
+        let note2 = {
+            title: "CAS FEE Selbststudium / Projekt Aufgabe erledigen / Übermässig langer Titel hat hier auch noch irgendwie Platz",
+            description: "HTML für die note App erstellen.\nCSS erstellen für die note App.",
+            creationDate: new Date()
+        };
 
-      }
+        db.post(note1, handler);
+        db.post(note2, handler);
 
-      function initDb() {
-          let note1 = {
-              title: "Dies mein Titel",
-              description: "Mein schöne Beschreibung",
-              creationDate: new Date()
-          };
-          let note2 = {
-              title: "CAS FEE Selbststudium / Projekt Aufgabe erledigen / Übermässig langer Titel hat hier auch noch irgendwie Platz",
-              description: "HTML für die note App erstellen.\nCSS erstellen für die note App.",
-              creationDate: new Date()
-          };
+        showNotesOverview();
+    }
 
-          db.post(note1, handler);
-          db.post(note2, handler);
+    function handler(err, result) {
+        if (err) {
+            console.log(err);
+        }
+    }
 
-          showNotesOverview();
-      }
+</script>
+<script type="module" src="js/app.js"></script>
 
-      function handler(err, result) {
-          if (err) {
-              console.log(err);
-          }
-      }
-  </script>
-  </body>
-  </html>
+
+</body>
+</html>
