@@ -1,12 +1,13 @@
 import NotesOverviewController from './notes-overview.controller.js';
 
 let ctrl = new NotesOverviewController();
-console.log(ctrl.getNotes());
-console.log(ctrl.doSomething());
+ctrl.renderNotes();
 
+//ctrl.getSortedNotes().then(window.console.log);
+//ctrl.doSomething().then(window.console.log);
 
 
 // (async () => {
-//     let notes = await ctrl.getNotes();
-//     console.log(notes);
+//     let notes = await ctrl.getSortedNotes();
+//     console.log(JSON.stringify(notes));
 // })();

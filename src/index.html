@@ -11,26 +11,18 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pouchdb/6.2.0/pouchdb.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment-with-locales.js"></script>
   <script
-      src="https://raw.github.com/badsyntax/handlebars-form-helpers/master/dist/handlebars.form-helpers.min.js"></script>
-
-  <!--
-  $.get('templates/products.hbs', function (data) {
-      var template=Handlebars.compile(data);
-      $(target).html(template(jsonData));
-  }, 'html')
-  -->
+      src="https://cdn.rawgit.com/badsyntax/handlebars-form-helpers/master/dist/handlebars.form-helpers.min.js"></script>
 
   <link href="reset.css" rel="stylesheet">
   <link href="style.css" rel="stylesheet">
-
-  <script src="loadTemplate.js"></script>
 </head>
 <body class="white-and-black" style="display: block;">
 
 <header class="flex-container" style="flex-direction: column; ">
   <section class="flex-container" style="justify-content: space-between;">
-    <button style="">Create new Note</button>
+    <button id="create-note" style="">Create new Note</button>
     <select id="style-selector" name="style" style=""
             onchange="let body = $('body'); body.removeClass(); body.addClass($('#style-selector')[0].value)">
       <option value="black-and-white">Black & White Style</option>
@@ -39,7 +31,7 @@
   </section>
 
   <section class="flex-container" style="justify-content: space-between;">
-    <form class="button-group">
+    <form class="button-group" id="notes-sort-form">
       <input id="sort-by-importance" type="radio" name="sort-by" checked>
       <label for="sort-by-importance" class="button">
         <i class="fa fa-circle-o icon-unchecked"></i>
@@ -73,7 +65,7 @@
 
 </main>
 
-<main style="flex: 1; overflow: auto">
+<main style="flex: 1; overflow: auto; max-width: 1200px;">
   <div class="form-group">
     <label>Titel</label>
     <input value="Mein schöner titel" class="input-control"/>
@@ -106,50 +98,48 @@ CSS erstellen für die note App.</textarea>
 
 <button onclick="initDb()">Fill DB</button>
 
-<script>
-    'use strict';
-    const mainContainerID = "main-container";
-    const db = new PouchDB('notes');
-    showNotesOverview();
+<!--<script id="notes-overview" type="text/x-handlebars-template">-->
+<!--<ol class="todo-list">-->
+<!--{{#each notes}}-->
+<!--<li class="flex-container" style="flex-direction:column; align-items: stretch;">-->
+<!--<article class="flex-container note-entry"-->
+<!--style="justify-content: space-between;align-items: stretch;align-content: center;flex-wrap: wrap;">-->
+<!--<section class="flex-container note-section"-->
+<!--style="flex-basis: 60%;flex-grow: 2;flex-direction: column;">-->
+<!--<div class="flex-container" style="justify-content: space-between;margin: 0 0 1em 0;">-->
+<!--<h1 style="">-->
+<!--{{ this.title }}-->
+<!--</h1>-->
+<!--<div style="min-width: 5em; flex-grow: 0;">-->
+<!--<i class="fa fa-bolt"></i>-->
+<!--<i class="fa fa-bolt"></i>-->
+<!--<i class="fa fa-bolt" style="color: var(&#45;&#45;button-bg-color)"></i>-->
+<!--<i class="fa fa-bolt" style="color: var(&#45;&#45;button-bg-color)"></i>-->
+<!--<i class="fa fa-bolt" style="color: var(&#45;&#45;button-bg-color)"></i>-->
+<!--</div>-->
+<!--</div>-->
+<!--<textarea readonly rows="10">{{ this.description }}</textarea>-->
+<!--</section>-->
 
-    function showNotesOverview() {
-        db.allDocs({include_docs: true, descending: true}, function (err, doc) {
-            new LoadTemplate(mainContainerID, "notes-overview", {notes: _.map(doc.rows, "doc")}).create(() => {
-            });
-        });
-    }
+<!--<section class="flex-container finished-section" style="flex-direction: column;flex-grow: 1;">-->
+<!--<div style="margin-bottom: 1em;">-->
+<!--Nächsten Mittwoch-->
+<!--</div>-->
+<!--<div>-->
+<!--<i class="fa fa-check-square-o"></i> Finished [Today]-->
+<!--</div>-->
+<!--</section>-->
 
-    function showNote() {
+<!--<div class="edit-section" style="flex-basis: 10%; flex-grow: 0;">-->
+<!--<button>Edit</button>-->
+<!--</div>-->
+<!--</article>-->
+<!--</li>-->
+<!--{{/each}}-->
+<!--</ol>-->
+<!--</script>-->
 
-    }
-
-    function initDb() {
-        let note1 = {
-            title: "Dies mein Titel",
-            description: "Mein schöne Beschreibung",
-            creationDate: new Date()
-        };
-        let note2 = {
-            title: "CAS FEE Selbststudium / Projekt Aufgabe erledigen / Übermässig langer Titel hat hier auch noch irgendwie Platz",
-            description: "HTML für die note App erstellen.\nCSS erstellen für die note App.",
-            creationDate: new Date()
-        };
-
-        db.post(note1, handler);
-        db.post(note2, handler);
-
-        showNotesOverview();
-    }
-
-    function handler(err, result) {
-        if (err) {
-            console.log(err);
-        }
-    }
-
-</script>
 <script type="module" src="js/app.js"></script>
-
 
 </body>
 </html>

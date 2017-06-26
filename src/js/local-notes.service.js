@@ -10,12 +10,12 @@ export default class LocalNotesService {
     }
 
     getNotes() {
-        return this.notes;
+        return Promise.resolve(this.notes);
     }
 
     createNote(note) {
         this.notes.push(note);
-        return this.notes;
+        return this.getNotes();
     }
 
     editNote(note) {
@@ -25,7 +25,7 @@ export default class LocalNotesService {
             storageNote.description = note.description;
         }
 
-        return this.notes;
+        return this.getNotes();
     }
 
     deleteNode(note) {
@@ -34,7 +34,6 @@ export default class LocalNotesService {
             this.notes.splice(i);
         }
 
-        return this.notes;
+        return this.getNotes();
     }
-
 }
