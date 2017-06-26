@@ -11,7 +11,6 @@ export default class NoteOverviewController {
             title: "Dies mein Titel",
             description: "Mein schöne Beschreibung",
             importance: 3,
-            finshed: false,
             finishDate: null,
             creationDate: new Date()
         });
@@ -20,7 +19,6 @@ export default class NoteOverviewController {
             title: "Dies mein zweiterTitel",
             description: "foobar",
             importance: 1,
-            finished: false,
             finishDate: null,
             creationDate: new Date()
         });
@@ -29,14 +27,13 @@ export default class NoteOverviewController {
             title: "Jeppa",
             description: "blubb",
             importance: 5,
-            finished: true,
             finishDate: moment("2017-06-25"),
             creationDate: new Date()
         });
 
         this.overviewTemplate = new HandlebarsTemplate("notes-overview");
         this.currentSort = "sort-by-importance";
-        this.showFinished = false;
+        this.showFinished = true;
 
 
         this.createNoteButton = document.getElementById("create-note");
@@ -58,13 +55,19 @@ export default class NoteOverviewController {
             this.showFinished = !this.showFinished;
             this.renderNotes();
         });
+
+        this.showFinishedCheckbox = document.getElementById("show-finished");
+        this.showFinishedCheckbox.addEventListener("change", ()=> {
+            this.showFinished = this.showFinishedCheckbox.checked;
+            this.renderNotes();
+        });
     }
 
     getSortedNotes() {
         return this.noteService.getNotes().then((notes) => {
             let _notes = _(notes);
             if (!this.showFinished) {
-                _notes = _notes.filter((note) => !note.finished);
+                _notes = _notes.filter((note) => !note.finishDate);
             }
             switch (this.currentSort) {
                 case "sort-by-importance":
