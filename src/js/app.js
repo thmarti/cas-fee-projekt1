@@ -1,6 +1,7 @@
 import NotesOverviewController from './notes-overview.controller.js';
 
 let ctrl = new NotesOverviewController();
+ctrl.renderSort()
 ctrl.renderNotes();
 
 //ctrl.getSortedNotes().then(window.console.log);

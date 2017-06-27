@@ -1,0 +1,8 @@
+{{#each sortTypes}}
+<input id="{{ this.id }}" type="radio" name="sort-by" {{#if this.selected}}checked{{/if}}>
+<label for="{{ this.id }}" class="button">
+    <i class="fa fa-circle-o icon-unchecked"></i>
+    <i class="fa fa-check-circle-o icon-checked"></i>
+    {{ this.name }}
+</label>
+{{/each}}

@@ -32,7 +32,25 @@ export default class NoteOverviewController {
         });
 
         this.overviewTemplate = new HandlebarsTemplate("notes-overview");
-        this.currentSort = "sort-by-importance";
+        this.sortTemplate = new HandlebarsTemplate("notes-sort-form");
+
+        this.sortTypes = [{
+            id: 'sort-by-importance',
+            name: "By importance",
+            sortFunction: (_notes) => _notes.sortBy("importance").reverse().value(),
+            selected: true
+        }, {
+            id: 'sort-by-finish-date',
+            name: "By finish date",
+            sortFunction: (_notes) => _notes.sortBy("finishDate").value(),
+            selected: false
+        }, {
+            id: 'sort-by-create-date',
+            name: "By creation date",
+            sortFunction: (_notes) => _notes.sortBy("creationDate").value(),
+            selected: false
+        }];
+
         this.showFinished = true;
 
 
@@ -46,18 +64,19 @@ export default class NoteOverviewController {
         this.notesSortForm = window.$("#notes-sort-form");
         this.notesSortForm.on("click", "input", () => {
             let element = this.notesSortForm.find("input:checked");
-            this.currentSort = element[0].id;
+            this.sortTypes.forEach((type) => type.selected = false);
+            _.find(this.sortTypes, (type) => type.id  === element[0].id).selected = true;
             this.renderNotes();
         });
 
-        this.createNoteButton = document.getElementById("show-finished");
+        this.createNoteButton = document.getElementById("create-note");
         this.createNoteButton.click((event) => {
             this.showFinished = !this.showFinished;
             this.renderNotes();
         });
 
         this.showFinishedCheckbox = document.getElementById("show-finished");
-        this.showFinishedCheckbox.addEventListener("change", ()=> {
+        this.showFinishedCheckbox.addEventListener("change", () => {
             this.showFinished = this.showFinishedCheckbox.checked;
             this.renderNotes();
         });
@@ -69,17 +88,12 @@ export default class NoteOverviewController {
             if (!this.showFinished) {
                 _notes = _notes.filter((note) => !note.finishDate);
             }
-            switch (this.currentSort) {
-                case "sort-by-importance":
-                    return _notes.sortBy("importance").reverse().value();
-                case "sort-by-finish-date":
-                    return _notes.sortBy("finishDate").value();
-                case "sort-by-create-date":
-                    return _notes.sortBy("creationDate").value();
-                default:
-                    return notes;
-            }
+            return _.find(this.sortTypes, "selected").sortFunction(_notes);
         });
+    }
+
+    renderSort() {
+        return this.sortTemplate.render("notes-sort-form", {sortTypes: this.sortTypes});
     }
 
     renderNotes() {

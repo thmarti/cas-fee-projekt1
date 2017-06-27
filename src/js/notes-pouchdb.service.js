@@ -1,5 +1,5 @@
 import PouchDB from "https://unpkg.com/pouchdb@6.2.0";
-import * as _ from 'https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js';
+import * as _ from 'https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash-4.17.4.min.js';
 
 
 export default class NotesPouchDBService {
