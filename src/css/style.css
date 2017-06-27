@@ -27,6 +27,8 @@ body.white-and-black {
     outline: none;
 }
 
+/* @media only screen and (min-resolution: 120dpi) */
+
 @media screen and (max-width: 999px) {
     .note-entry {
         flex-direction: column;
@@ -66,7 +68,6 @@ button {
     display: inline-block;
     padding: 6px 12px;
     margin-bottom: 0;
-    text-align: center;
     white-space: nowrap;
     vertical-align: middle;
     cursor: pointer;
