@@ -3,8 +3,7 @@ import HandlebarsTemplate from './handlebars-template.js';
 
 
 export default class NoteDetailController {
-  constructor(routes) {
-    this.routes = routes;
+  constructor() {
     this.noteService = new LocalNotesService();
 
     this.detailTemplate = new HandlebarsTemplate("edit-note");
@@ -13,6 +12,10 @@ export default class NoteDetailController {
 
     //id = "save-detail"
     //id = "cancel-detail"
+  }
+
+  setRoutes(routes) {
+    this.routes = routes;
   }
 
   show(id) {

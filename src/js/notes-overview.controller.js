@@ -3,9 +3,7 @@ import HandlebarsTemplate from './handlebars-template.js';
 import {_, $, moment} from './lib.js';
 
 export default class NoteOverviewController {
-  constructor(routes) {
-    this.routes = routes;
-
+  constructor() {
     this.noteService = new LocalNotesService();
     this.noteService.createNote({
       id: 1,
@@ -59,11 +57,13 @@ export default class NoteOverviewController {
 
 
     this.createNoteButton = document.getElementById("create-note");
-    this.createNoteButton.click((event) => {
-      this.routes.showDetailView();
-      // TODO: brauchts das?
-      event.preventDefault();
-    });
+//    this.createNoteButton.click((event) => {
+//       this.routes.showDetailView();
+//       // TODO: brauchts das?
+//       event.preventDefault();
+//     });
+    this.createNoteButton.click(this.createNoteButtonPressed);
+
 
 //        this.notesSortForm = document.getElementById("notes-sort-form");
     this.notesSortForm = $("#notes-sort-form");
@@ -86,6 +86,16 @@ export default class NoteOverviewController {
       this.routes.showDetailView(id);
     });
 
+  }
+
+  setRoutes(routes) {
+    this.routes = routes;
+  }
+
+  createNoteButtonPressed(event) {
+    this.routes.showDetailView();
+    // TODO: brauchts das?
+    event.preventDefault();
   }
 
   getSortedNotes() {
