@@ -1,4 +1,4 @@
-import Handlebars from './handelbars.lib.js';
+import {Handlebars} from './lib.js';
 
 export default class HandlebarsTemplate {
 

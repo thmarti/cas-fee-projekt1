@@ -1,14 +1,6 @@
-import NotesOverviewController from './notes-overview.controller.js';
+import './handelbars.helpers.js';
+import Routes from './routes.js';
 
-let ctrl = new NotesOverviewController();
-ctrl.renderSort()
-ctrl.renderNotes();
-
-//ctrl.getSortedNotes().then(window.console.log);
-//ctrl.doSomething().then(window.console.log);
+let routes = new Routes();
 
 
-// (async () => {
-//     let notes = await ctrl.getSortedNotes();
-//     console.log(JSON.stringify(notes));
-// })();

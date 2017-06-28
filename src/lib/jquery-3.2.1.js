@@ -4685,7 +4685,7 @@ jQuery.fn.extend( {
 			if ( isHiddenWithinTree( this ) ) {
 				jQuery( this ).show();
 			} else {
-				jQuery( this ).hide();
+				NoteDetailController.hide();
 			}
 		} );
 	}

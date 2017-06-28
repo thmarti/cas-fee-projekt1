@@ -32,28 +32,9 @@
     </section>
 
     <section class="flex-container" style="justify-content: space-between;">
-        <form class="button-group" id="notes-sort-form">
-            <!--<input id="sort-by-importance" type="radio" name="sort-by" checked>-->
-            <!--<label for="sort-by-importance" class="button">-->
-                <!--<i class="fa fa-circle-o icon-unchecked"></i>-->
-                <!--<i class="fa fa-check-circle-o icon-checked"></i>-->
-                <!--By importance-->
-            <!--</label>-->
-            <!--<input id="sort-by-finish-date" type="radio" name="sort-by">-->
-            <!--<label for="sort-by-finish-date" class="button">-->
-                <!--<i class="fa fa-circle-o icon-unchecked"></i>-->
-                <!--<i class="fa fa-check-circle-o icon-checked"></i>-->
-                <!--By finish date-->
-            <!--</label>-->
-            <!--<input id="sort-by-create-date" type="radio" name="sort-by">-->
-            <!--<label for="sort-by-create-date" class="button">-->
-                <!--<i class="fa fa-circle-o icon-unchecked"></i>-->
-                <!--<i class="fa fa-check-circle-o icon-checked"></i>-->
-                <!--By created date-->
-            <!--</label>-->
-        </form>
+        <form class="button-group" id="notes-sort-form"></form>
 
-        <input id="show-finished" type="checkbox" name="show-finished" class="button">
+        <input id="show-finished" type="checkbox" name="show-finished" class="button" checked>
         <label for="show-finished" class="button">
             <i class="fa fa-square-o icon-unchecked"></i>
             <i class="fa fa-check-square-o icon-checked"></i>
@@ -66,38 +47,43 @@
 
 </main>
 
-<main style="flex: 1; overflow: auto; max-width: 1200px;">
-    <div class="form-group">
-        <label>Titel</label>
-        <input value="Mein schöner titel" class="input-control"/>
-    </div>
+<div class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
 
-    <div class="form-group">
-        <label>Beschreibung</label>
-        <textarea class="input-control" rows="10">HTML für die note App erstellen.
+        <main style="flex: 1; overflow: auto; max-width: 1200px;" id="detail-container">
+            <div class="form-group">
+                <label>Titel</label>
+                <input value="Mein schöner titel" class="input-control"/>
+            </div>
+
+            <div class="form-group">
+                <label>Beschreibung</label>
+                <textarea class="input-control" rows="10">HTML für die note App erstellen.
 CSS erstellen für die note App.</textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Wichtigkeit</label>
+                <!-- Mit Radio Buttons und :selected lösen -->
+                <div style="min-width: 5em; flex-grow: 0;">
+                    <i class="fa fa-bolt"></i>
+                    <i class="fa fa-bolt"></i>
+                    <i class="fa fa-bolt" style="color: var(--button-bg-color)"></i>
+                    <i class="fa fa-bolt" style="color: var(--button-bg-color)"></i>
+                    <i class="fa fa-bolt" style="color: var(--button-bg-color)"></i>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>&nbsp;</label>
+                <button id="save-detail">Save</button>
+                <button id="cancel-detail">Cancel</button>
+            </div>
+        </main>
     </div>
 
-    <div class="form-group">
-        <label>Wichtigkeit</label>
-        <!-- Mit Radio Buttons und :selected lösen -->
-        <div style="min-width: 5em; flex-grow: 0;">
-            <i class="fa fa-bolt"></i>
-            <i class="fa fa-bolt"></i>
-            <i class="fa fa-bolt" style="color: var(--button-bg-color)"></i>
-            <i class="fa fa-bolt" style="color: var(--button-bg-color)"></i>
-            <i class="fa fa-bolt" style="color: var(--button-bg-color)"></i>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label>&nbsp;</label>
-        <button>Save</button>
-        <button>Cancel</button>
-    </div>
-</main>
-
-<button onclick="initDb()">Fill DB</button>
+</div>
 
 <script type="module" src="js/app.js"></script>
 

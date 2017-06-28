@@ -1,42 +1,38 @@
-<ol class="todo-list">
-  {{#each notes}}
-    <li class="flex-container" style="flex-direction:column; align-items: stretch;">
-      <article class="flex-container note-entry"
-               style="justify-content: space-between;align-items: stretch;align-content: center;flex-wrap: wrap;">
-        <section class="flex-container note-section"
-                 style="flex-basis: 60%;flex-grow: 2;flex-direction: column;">
-          <div class="flex-container" style="justify-content: space-between;margin: 0 0 1em 0;">
-            <h1 style="">
-              {{ this.title }}
-            </h1>
-            <div style="min-width: 5em; flex-grow: 0;">
-              <i class="fa fa-bolt"></i>
-              <i class="fa fa-bolt"></i>
-              <i class="fa fa-bolt" style="color: var(--button-bg-color)"></i>
-              <i class="fa fa-bolt" style="color: var(--button-bg-color)"></i>
-              <i class="fa fa-bolt" style="color: var(--button-bg-color)"></i>
-            </div>
-          </div>
-          <textarea readonly rows="10">{{ this.description }}</textarea>
-        </section>
+<ol class="notes-list" id="notes-list">
+    {{#each notes}}
+        <li class="flex-container" style="flex-direction:column; align-items: stretch;">
+            <article class="flex-container note-entry" style="justify-content: space-between;align-items: stretch;align-content: center;flex-wrap: wrap;" data-note-id="{{id}}">
+                <section class="flex-container note-section" style="flex-basis: 60%;flex-grow: 2;flex-direction: column;">
+                    <div class="flex-container" style="justify-content: space-between;margin: 0 0 1em 0; cursor: default;">
+                        <h1>{{title}}</h1>
+                        <div style="min-width: 5em; flex-grow: 0;" title="Importance: {{importance}}">
+                            {{#times 5}}
+                                <i class="fa fa-bolt" {{#ifCond ../importance '<' this}}style="color: var(--button-bg-color)"{{/ifCond}}></i>
+                            {{/times}}
+                        </div>
+                    </div>
+                    <textarea readonly rows="10">{{description}}</textarea>
+                </section>
 
-        <section class="flex-container finished-section" style="flex-direction: column;flex-grow: 1;">
-          <div style="margin-bottom: 1em;">
-            Nächsten Mittwoch
-          </div>
-          <div>
-            {{#if this.finishDate }}
-              <i class="fa fa-check-square-o"></i> Finished [{{ this.finishDate }}]
-            {{else}}
-              <i class="fa fa-square-o"></i> Finished
-            {{/if}}
-          </div>
-        </section>
+                <section class="flex-container finished-section" style="flex-direction: column;flex-grow: 1;">
+                    <div style="margin-bottom: 1em;">
+                        {{#if dueDate}}
+                            Due: {{{formatRelative dueDate}}}
+                        {{/if}}
+                    </div>
+                    <div>
+                        {{#if finishDate}}
+                            <i class="fa fa-check-square-o"></i> Finished [{{{formatRelative finishDate}}}]
+                        {{else}}
+                            <i class="fa fa-square-o"></i> Not Finished
+                        {{/if}}
+                    </div>
+                </section>
 
-        <div class="edit-section" style="flex-basis: 10%; flex-grow: 0;">
-          <button>Edit</button>
-        </div>
-      </article>
-    </li>
-  {{/each}}
+                <div class="edit-section" style="flex-basis: 10%; flex-grow: 0;">
+                    <button id="edit-note-{{id}}">Edit</button>
+                </div>
+            </article>
+        </li>
+    {{/each}}
 </ol>

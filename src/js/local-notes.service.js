@@ -1,39 +1,42 @@
 export default class LocalNotesService {
-    constructor() {
-        let key = "notes";
-        this.notes = window.localStorage.getItem(key);
+  constructor() {
+    this.key = "notes";
+    this.notes = [];
 
-        if (!this.notes) {
-            this.notes = [];
-            window.localStorage.setItem(key, this.notes);
-        }
+//    if (!this.notes) {
+//      window.localStorage.setItem(this.key, this.notes);
+//    }
+  }
+
+  getNotes() {
+    return Promise.resolve(this.notes);
+  }
+
+  getNote(id) {
+    return Promise.resolve(this.notes.find((note) => note.id === id));
+  }
+
+  createNote(note) {
+    this.notes.push(note);
+    return this.getNotes();
+  }
+
+  editNote(note) {
+    let storageNote = this.notes.find((n) => n.id === note.id);
+    if (storageNote) {
+      storageNote.title = note.title;
+      storageNote.description = note.description;
     }
 
-    getNotes() {
-        return Promise.resolve(this.notes);
+    return this.getNotes();
+  }
+
+  deleteNode(note) {
+    let i = this.notes.findIndex((n) => n.id === note.id);
+    if (i >= 0) {
+      this.notes.splice(i);
     }
 
-    createNote(note) {
-        this.notes.push(note);
-        return this.getNotes();
-    }
-
-    editNote(note) {
-        let storageNote = this.notes.find((n) => n.id === note.id);
-        if (storageNote) {
-            storageNote.title = note.title;
-            storageNote.description = note.description;
-        }
-
-        return this.getNotes();
-    }
-
-    deleteNode(note) {
-        let i = this.notes.findIndex((n) => n.id === note.id);
-        if (i >= 0) {
-            this.notes.splice(i);
-        }
-
-        return this.getNotes();
-    }
+    return this.getNotes();
+  }
 }
