@@ -16,7 +16,11 @@ class LocalNotesService {
     return Promise.resolve(this.notes.find((note) => note.id === id));
   }
 
-  createNote(note) {
+  createNote() {
+    return Promise.resolve({creationDate: new Date()});
+  }
+
+  saveNewNote(note) {
     this.notes.push(note);
     return this.getNotes();
   }

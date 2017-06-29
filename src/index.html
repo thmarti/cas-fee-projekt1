@@ -24,8 +24,7 @@
 <header class="flex-container" style="flex-direction: column; ">
     <section class="flex-container" style="justify-content: space-between;">
         <button id="create-note" style="">Create new Note</button>
-        <select id="style-selector" name="style" style=""
-                onchange="let body = $('body'); body.removeClass(); body.addClass($('#style-selector')[0].value)">
+        <select id="style-selector" name="style">
             <option value="black-and-white">Black & White Style</option>
             <option value="white-and-black" selected>White & Black Style</option>
         </select>
@@ -35,7 +34,7 @@
         <form class="button-group" id="notes-sort-form"></form>
 
         <input id="show-finished" type="checkbox" name="show-finished" class="button" checked>
-        <label for="show-finished" class="button">
+        <label for="show-finished" class="button" style="height: 2em;">
             <i class="fa fa-square-o icon-unchecked"></i>
             <i class="fa fa-check-square-o icon-checked"></i>
             Show finished
@@ -43,14 +42,12 @@
     </section>
 </header>
 
-<main style="flex: 1; overflow: auto" id="main-container">
+<main style="flex: 1; overflow: auto" id="overview-container">
 
 </main>
 
 <div class="modal hide" id="modal-container">
     <div class="modal-content">
-        <span class="close">&times;</span>
-
         <main style="flex: 1; overflow: auto; max-width: 1200px;" id="detail-container"></main>
     </div>
 

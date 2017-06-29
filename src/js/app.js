@@ -1,5 +1,5 @@
 import './handelbars.helpers.js';
-import Routes from './routes.js';
+import Routes from './routes.class.js';
 import NotesOverviewController from './notes-overview.controller.js';
 import NoteDetailController from './note-detail.controller.js';
 

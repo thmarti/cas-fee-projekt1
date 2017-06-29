@@ -26,9 +26,6 @@ export default class HandlebarsTemplate {
           return this.compiledTemplate;
         })
         .catch(e => window.console.log("Fetch Error", e));
-
-//            let templateHtml = window.$('#' + this.templateName).html();
-//            this.compiledTemplate = Handlebars.compile(templateHtml);
     } else {
       return Promise.resolve(this.compiledTemplate);
     }
