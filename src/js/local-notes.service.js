@@ -1,4 +1,4 @@
-export default class LocalNotesService {
+class LocalNotesService {
   constructor() {
     this.key = "notes";
     this.notes = [];
@@ -40,3 +40,5 @@ export default class LocalNotesService {
     return this.getNotes();
   }
 }
+
+export default new LocalNotesService();

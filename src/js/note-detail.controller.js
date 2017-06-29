@@ -1,40 +1,49 @@
-import LocalNotesService from './local-notes.service.js';
+import noteService from './local-notes.service.js';
 import HandlebarsTemplate from './handlebars-template.js';
-
+import {$} from './lib.js';
 
 export default class NoteDetailController {
   constructor() {
-    this.noteService = new LocalNotesService();
-
     this.detailTemplate = new HandlebarsTemplate("edit-note");
 
-    document.getElementById("save-detail");
-
-    //id = "save-detail"
-    //id = "cancel-detail"
+    let detailContainer = $("#detail-container");
+    detailContainer.on("click", "#save-detail", () => this.saveAndClose());
+    detailContainer.on("click", "#cancel-detail", () => this.close());
   }
 
   setRoutes(routes) {
     this.routes = routes;
   }
 
+  saveAndClose() {
+    // TODO: Map note
+    let note = {};
+
+    let action = (this.note.id ? noteService.editNote(note) : this.noteService.createNote(note));
+    action.then(() => {
+      this.close();
+      this.routes.showOverview();
+    });
+  }
+
   show(id) {
-    this.noteService.getNote(id).then((note) => {
+    noteService.getNote(id).then((note) => {
       this.note = note;
       this.detailTemplate.render("detail-container", this.note);
       NoteDetailController.displayContainer(true);
     });
   }
 
-  hide() {
+  close() {
     NoteDetailController.displayContainer(false);
     this.note = null;
   }
 
   static displayContainer(show) {
-    // TODO: continue
-    let classList = document.getElementById("detail-container").classList;
-    classList.remove("", "");
-    classList.add("s");
+    let classList = document.getElementById("modal-container").classList;
+    classList.remove("hide");
+    if (!show) {
+      classList.add("hide");
+    }
   }
 }

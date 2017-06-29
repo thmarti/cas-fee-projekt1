@@ -1,11 +1,10 @@
-import LocalNotesService from './local-notes.service.js';
+import noteService from './local-notes.service.js';
 import HandlebarsTemplate from './handlebars-template.js';
 import {_, $, moment} from './lib.js';
 
 export default class NoteOverviewController {
   constructor() {
-    this.noteService = new LocalNotesService();
-    this.noteService.createNote({
+    noteService.createNote({
       id: 1,
       title: "Dies mein Titel",
       description: "Mein schöne Beschreibung",
@@ -14,7 +13,7 @@ export default class NoteOverviewController {
       finishDate: null,
       creationDate: new Date()
     });
-    this.noteService.createNote({
+    noteService.createNote({
       id: 2,
       title: "Dies mein zweiterTitel",
       description: "foobar",
@@ -23,7 +22,7 @@ export default class NoteOverviewController {
       finishDate: null,
       creationDate: new Date()
     });
-    this.noteService.createNote({
+    noteService.createNote({
       id: 3,
       title: "Jeppa",
       description: "blubb",
@@ -55,24 +54,11 @@ export default class NoteOverviewController {
 
     this.showFinished = true;
 
-
     this.createNoteButton = document.getElementById("create-note");
-//    this.createNoteButton.click((event) => {
-//       this.routes.showDetailView();
-//       // TODO: brauchts das?
-//       event.preventDefault();
-//     });
-    this.createNoteButton.click(this.createNoteButtonPressed);
+    this.createNoteButton.addEventListener("click", (event) => this.createNoteButtonPressed(event));
 
-
-//        this.notesSortForm = document.getElementById("notes-sort-form");
     this.notesSortForm = $("#notes-sort-form");
-    this.notesSortForm.on("click", "input", () => {
-      let element = this.notesSortForm.find("input:checked");
-      this.sortTypes.forEach((type) => type.selected = false);
-      _.find(this.sortTypes, (type) => type.id === element[0].id).selected = true;
-      this.renderNotes();
-    });
+    this.notesSortForm.on("click", "input", (event) => this.sortButtonPressed(event));
 
     this.showFinishedCheckbox = document.getElementById("show-finished");
     this.showFinishedCheckbox.addEventListener("change", () => {
@@ -82,10 +68,9 @@ export default class NoteOverviewController {
 
     this.notesList = $("#main-container");
     this.notesList.on("click", "button", (event) => {
-      let id = parseInt($(event.target).closest("[data-note-id]").dataset.noteId);
+      let id = parseInt($(event.target).closest("[data-note-id]")[0].dataset.noteId);
       this.routes.showDetailView(id);
     });
-
   }
 
   setRoutes(routes) {
@@ -95,11 +80,19 @@ export default class NoteOverviewController {
   createNoteButtonPressed(event) {
     this.routes.showDetailView();
     // TODO: brauchts das?
-    event.preventDefault();
+    //event.preventDefault();
+  }
+
+  sortButtonPressed(event) {
+    let idToFind = this.notesSortForm.find("input:checked")[0].id;
+    this.sortTypes.forEach((type) => type.selected = false);
+    _.find(this.sortTypes, (type) => type.id === idToFind).selected = true;
+    this.renderNotes();
   }
 
   getSortedNotes() {
-    return this.noteService.getNotes().then((notes) => {
+    //TODO: Filtern in Service
+    return noteService.getNotes().then((notes) => {
       let _notes = _(notes);
       if (!this.showFinished) {
         _notes = _notes.filter((note) => !note.finishDate);

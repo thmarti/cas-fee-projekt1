@@ -8,7 +8,6 @@ export default class Routes {
   }
 
   showOverview() {
-    NoteDetailController.hide();
     this.notesOverviewController.renderNotes();
   }
 

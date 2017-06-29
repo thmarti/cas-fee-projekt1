@@ -1,29 +1,37 @@
 <div class="form-group">
-  <label>Titel</label>
-  <input value="Mein schöner titel" class="input-control"/>
+    <label>Title</label>
+    {{input "title" this.title class="input-control"}}
 </div>
 
 <div class="form-group">
-  <label>Beschreibung</label>
-  <textarea class="input-control" rows="10">HTML für die note App erstellen.
-CSS erstellen für die note App.</textarea>
+    <label>Description</label>
+    {{textarea "description" this.description class="input-control" rows="10"}}
 </div>
 
 <div class="form-group">
-  <label>Wichtigkeit</label>
-  <!-- Mit Radio Buttons und :selected lösen -->
-  <!-- http://www.cssscript.com/simple-5-star-rating-system-with-css-and-html-radios/-->
-  <div style="min-width: 5em; flex-grow: 0;">
-    <i class="fa fa-bolt"></i>
-    <i class="fa fa-bolt"></i>
-    <i class="fa fa-bolt" style="color: var(--button-bg-color)"></i>
-    <i class="fa fa-bolt" style="color: var(--button-bg-color)"></i>
-    <i class="fa fa-bolt" style="color: var(--button-bg-color)"></i>
-  </div>
+    <label>Importance</label>
+    <!-- Mit Radio Buttons und :selected lösen -->
+    <!-- http://www.cssscript.com/simple-5-star-rating-system-with-css-and-html-radios/-->
+
+    <div style="min-width: 5em; flex-grow: 0;">
+        {{#times 5}}
+            <input id="importance{{this}}" type="radio" class="importance-radio" name="importance"
+                   {{#ifCond ../importance '==' this}}checked{{/ifCond}}>
+            <label for="importance{{this}}" class="fa fa-bolt"></label>
+        {{/times}}
+        <!--        <input id="importance1" type="radio" name="importance" {{#if this.selected}}checked{{/if}}> -->
+        <!--<input id="importance2" type="radio" class="button" name="importance" style="color: var(--button-bg-color)">-->
+        <!--<label for="importance2" class="fa fa-bolt"></label>-->
+    </div>
 </div>
 
 <div class="form-group">
-  <label>&nbsp;</label>
-  <button>Save</button>
-  <button>Cancel</button>
+    <label>Due Date</label>
+    {{input "dueDate" this.dueDate type="date" class="input-control"}}
+</div>
+
+<div class="form-group">
+    <label>&nbsp;</label>
+    <button id="save-detail">Save</button>
+    <button id="cancel-detail">Cancel</button>
 </div>

@@ -53,6 +53,10 @@ section {
     margin-top: 1em;
 }
 
+.hide {
+    display: none;
+}
+
 .notes-list {
 
 }
@@ -104,6 +108,7 @@ input[type="radio"]:checked + label {
 }
 
 input[type="radio"].button,
+input[type="radio"].importance-radio,
 input[type="checkbox"].button,
 .button-group input[type="radio"],
 .button-group input[type="checkbox"] {
@@ -131,14 +136,14 @@ h1 {
     flex-direction: row;
 }
 
-.form-group label {
+.form-group > label {
     flex: none;
     display: block;
     width: 150px;
     font-weight: bold;
     font-size: 1em;
 }
-.form-group label.right-inline {
+.form-group > label.right-inline {
     text-align: right;
     padding-right: 8px;
     padding-left: 10px;
@@ -176,7 +181,7 @@ button {
 }
 
 .modal {
-    display: none; /* Hidden by default */
+    //display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
     left: 0;
@@ -210,4 +215,16 @@ button {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+input[type="radio"].importance-radio + label {
+    color: var(--front-color);
+    background-color: transparent;
+    cursor: hand;
+}
+
+input[type="radio"].importance-radio:checked ~ input[type="radio"] + label {
+    color: var(--button-bg-color);
+    background-color: transparent;
+    cursor: hand;
 }
