@@ -1,3 +1,5 @@
+import Note from './note.class.js';
+
 class LocalNotesService {
   constructor() {
     this.key = "notes";
@@ -9,30 +11,27 @@ class LocalNotesService {
   }
 
   getNotes() {
-    return Promise.resolve(this.notes);
+    return Promise.resolve(this.notes.map(n => new Note(n)));
   }
 
   getNote(id) {
-    return Promise.resolve(this.notes.find((note) => note.id === id));
+    let noteObj = this.notes.find((note) => note.id === id);
+    return Promise.resolve(noteObj ? new Note(noteObj) : null);
   }
 
   createNote() {
-    return Promise.resolve({creationDate: new Date()});
+    return Promise.resolve(Note.createNote());
   }
 
   saveNewNote(note) {
-    this.notes.push(note);
-    return this.getNotes();
+    this.notes.push(note.copyToObject());
   }
 
   editNote(note) {
     let storageNote = this.notes.find((n) => n.id === note.id);
     if (storageNote) {
-      storageNote.title = note.title;
-      storageNote.description = note.description;
+      note.copyToObject(storageNote);
     }
-
-    return this.getNotes();
   }
 
   deleteNode(note) {
@@ -40,8 +39,6 @@ class LocalNotesService {
     if (i >= 0) {
       this.notes.splice(i);
     }
-
-    return this.getNotes();
   }
 }
 

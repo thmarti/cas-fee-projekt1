@@ -1,10 +1,11 @@
+import Note from './note.class.js';
 import noteService from './local-notes.service.js';
 import HandlebarsTemplate from './handlebars-template.class.js';
 import {_, $, moment} from './lib.js';
 
 export default class NoteOverviewController {
   constructor() {
-    noteService.saveNewNote({
+    noteService.saveNewNote(new Note({
       id: 1,
       title: "Dies mein Titel",
       description: "Mein schöne Beschreibung",
@@ -12,25 +13,25 @@ export default class NoteOverviewController {
       dueDate: null,
       finishDate: null,
       creationDate: new Date()
-    });
-    noteService.saveNewNote({
+    }));
+    noteService.saveNewNote(new Note({
       id: 2,
       title: "Dies mein zweiterTitel",
       description: "foobar",
       importance: 1,
-      dueDate: moment("2017-06-29"),
+      dueDate: moment("2017-06-29","YYYY-MM-DD").toDate(),
       finishDate: null,
       creationDate: new Date()
-    });
-    noteService.saveNewNote({
+    }));
+    noteService.saveNewNote(new Note({
       id: 3,
       title: "Jeppa",
       description: "blubb",
       importance: 5,
-      dueDate: moment("2017-06-27"),
-      finishDate: moment("2017-06-25"),
+      dueDate: moment("2017-06-27" ,"YYYY-MM-DD").toDate(),
+      finishDate: moment("2017-06-25" ,"YYYY-MM-DD").toDate(),
       creationDate: new Date()
-    });
+    }));
 
     this.overviewTemplate = new HandlebarsTemplate("notes-overview");
     this.sortTemplate = new HandlebarsTemplate("notes-sort-form");

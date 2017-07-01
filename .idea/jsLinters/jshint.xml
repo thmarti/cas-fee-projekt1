@@ -58,6 +58,7 @@
     <option passfail="false" />
     <option phantom="false" />
     <option plusplus="false" />
+    <option predef="require,console,global,window,document,__dirname,process" />
     <option proto="false" />
     <option prototypejs="false" />
     <option qunit="false" />

@@ -30,7 +30,7 @@ export default class NoteDetailController {
     this.note.description = $("textarea[name='note-description']")[0].value;
     this.note.importance = parseInt($("input[name='note-importance']:checked")[0].dataset.importance);
     let dateString = $("input[name='note-duedate']")[0].value;
-    this.note.dueDate = moment(dateString, "yyyy-MM-dd") ;
+    this.note.dueDate = moment(dateString, "yyyy-MM-dd").toDate() ;
 
     let action = (this.note.id ? noteService.editNote(this.note) : noteService.saveNewNote(this.note));
     action.then(() => {

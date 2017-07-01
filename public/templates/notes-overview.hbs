@@ -17,14 +17,16 @@
                 <section class="flex-container finished-section" style="flex-direction: column;flex-grow: 1;">
                     <div style="margin-bottom: 1em;">
                         {{#if dueDate}}
-                            Due: {{{formatRelative dueDate}}}
+                            <span title="{{dueDateFormatted}}" style="cursor: default;">
+                                Due: {{!--{formatRelative dueDate}--}} {{dueDate}}
+                            </span>
                         {{else}}
                             No due date
                         {{/if}}
                     </div>
                     <div>
                         {{#if finishDate}}
-                            <i class="fa fa-check-square-o"></i> Finished [{{{formatRelative finishDate}}}]
+                            <i class="fa fa-check-square-o"></i> Finished [{{!--{formatRelative finishDate}--}}]
                         {{else}}
                             <i class="fa fa-square-o"></i> Not Finished
                         {{/if}}

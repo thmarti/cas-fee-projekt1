@@ -1,0 +1,27 @@
+{
+  "name": "cas-fee-projekt1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thmarti/cas-fee-projekt1.git"
+  },
+  "author": "thmarti",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thmarti/cas-fee-projekt1/issues"
+  },
+  "homepage": "https://github.com/thmarti/cas-fee-projekt1#readme",
+  "dependencies": {
+    "body-parser": "^1.12.4",
+    "express": "^4.12.4",
+    "express-jwt": "^5.1.0",
+    "jsonwebtoken": "^7.1.9",
+    "nedb": "^1.1.2",
+    "reload": "^1.1.7"
+  }
+}
