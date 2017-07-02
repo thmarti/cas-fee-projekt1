@@ -11,5 +11,4 @@ export default class Routes {
   showDetailView(id) {
     this.noteDetailController.show(id);
   }
-
 }

@@ -1,0 +1,46 @@
+<ol class="notes-list" id="notes-list">
+    {{#each notes}}
+        <li class="flex-container flex-vertical">
+            <article class="flex-container note-entry" data-note-id="{{id}}">
+                <section class="flex-container note-section">
+                    <div class="flex-container note-header" >
+                        <h2>{{title}}</h2>
+                        <div class="default-cursor importance-widget" title="Importance: {{importance}}">
+                            {{#times 5}}
+                                <i class="fa fa-star {{#ifCond ../importance '<' this}}disabled-color{{/ifCond}}"></i>
+                            {{/times}}
+                        </div>
+                    </div>
+                    <textarea readonly rows="8">{{description}}</textarea>
+                </section>
+
+                <section class="flex-container finished-section">
+                    <div class="duedate-section">
+                        {{#if dueDate}}
+                            <span title="{{{formatDate dueDate}}}" class="default-cursor">
+                                Due: {{{formatRelative dueDate}}}
+                            </span>
+                        {{else}}
+                            No due date
+                        {{/if}}
+                    </div>
+                    <div>
+                        <input type="checkbox" name="finish-checkbox" id="finished{{this.id}}" {{#if finishDate}}checked{{/if}} class="hide"/>
+                        <label for="finished{{this.id}}">
+                            <span class="icon-unchecked">
+                                <i class="fa fa-square-o"></i> Not Finished
+                            </span>
+                            <span class="icon-checked" title="{{{formatTime finishDate}}}">
+                                <i class="fa fa-check-square-o"></i> Finished <br>[{{{formatRelative finishDate}}}]
+                            </span>
+                        </label>
+                    </div>
+                </section>
+
+                <div class="edit-section">
+                    <button id="edit-note-{{id}}" name="edit-button">Edit</button>
+                </div>
+            </article>
+        </li>
+    {{/each}}
+</ol>

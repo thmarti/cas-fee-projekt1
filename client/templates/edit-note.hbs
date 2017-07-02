@@ -5,16 +5,16 @@
 
 <div class="form-group">
     <label>Description</label>
-    {{textarea "note-description" this.description class="input-control" rows="10"}}
+    {{textarea "note-description" this.description class="input-control" rows="8"}}
 </div>
 
 <div class="form-group">
     <label>Importance</label>
-    <div style="min-width: 5em; flex-grow: 0;">
+    <div class="importance-widget">
         {{#times 5}}
             <input id="importance{{this}}" type="radio" class="importance-radio" name="note-importance"
                    data-importance="{{this}}" {{#ifCond ../importance '==' this}}checked{{/ifCond}}>
-            <label for="importance{{this}}" class="fa fa-bolt"></label>
+            <label for="importance{{this}}" class="fa fa-star"></label>
         {{/times}}
     </div>
 </div>

@@ -1,4 +1,4 @@
-import noteService from './local-notes.service.js';
+import noteService from './rest-notes.service.js';
 import HandlebarsTemplate from './handlebars-template.class.js';
 import {$, moment} from './lib.js';
 
@@ -17,7 +17,7 @@ export default class NoteDetailController {
 
   show(id) {
     let action = (id ? noteService.getNote(id) : noteService.createNote());
-    action.then((note) => {
+    action.then(note => {
       this.note = note;
       this.detailTemplate.render("detail-container", this.note);
       NoteDetailController.displayContainer(true);
@@ -25,15 +25,12 @@ export default class NoteDetailController {
   }
 
   saveAndClose() {
-    // TODO: Map note
     this.note.title = $("input[name='note-title']")[0].value;
     this.note.description = $("textarea[name='note-description']")[0].value;
     this.note.importance = parseInt($("input[name='note-importance']:checked")[0].dataset.importance);
-    let dateString = $("input[name='note-duedate']")[0].value;
-    this.note.dueDate = moment(dateString, "yyyy-MM-dd").toDate() ;
+    this.note.dueDateFormatted = $("input[name='note-duedate']")[0].value;
 
-    let action = (this.note.id ? noteService.editNote(this.note) : noteService.saveNewNote(this.note));
-    action.then(() => {
+    noteService.saveNote(this.note).then(() => {
       this.close();
       this.routes.showOverview();
     });

@@ -17,22 +17,23 @@
     <link href="lib/reset.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 </head>
-<body class="white-and-black" style="display: block;">
+<body class="white-and-black">
 
-<header class="flex-container" style="flex-direction: column; ">
-    <section class="flex-container" style="justify-content: space-between;">
-        <button id="create-note" style="">Create new Note</button>
+<header class="flex-container flex-vertical">
+    <section class="flex-container title-section">
+        <h1 title="Welcome to Note Pro - The world's ugliest note taking application!">Note Pro</h1>
+        <button id="create-note">Create new Note</button>
         <select id="style-selector" name="style">
             <option value="black-and-white">Black & White Style</option>
             <option value="white-and-black" selected>White & Black Style</option>
         </select>
     </section>
 
-    <section class="flex-container" style="justify-content: space-between;">
+    <section class="flex-container">
         <form class="button-group" id="notes-sort-form"></form>
 
         <input id="show-finished" type="checkbox" name="show-finished" class="button" checked>
-        <label for="show-finished" class="button" style="height: 2em;">
+        <label for="show-finished" class="button">
             <i class="fa fa-square-o icon-unchecked"></i>
             <i class="fa fa-check-square-o icon-checked"></i>
             Show finished
@@ -40,15 +41,13 @@
     </section>
 </header>
 
-<main style="flex: 1; overflow: auto" id="overview-container">
-
+<main id="overview-container">
 </main>
 
 <div class="modal hide" id="modal-container">
     <div class="modal-content">
-        <main style="flex: 1; overflow: auto; max-width: 1200px;" id="detail-container"></main>
+        <article id="detail-container"></article>
     </div>
-
 </div>
 
 <script type="module" src="js/app.js"></script>

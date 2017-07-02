@@ -33,7 +33,6 @@ Handlebars.registerHelper('ifCond', (v1, operator, v2, options) => {
   }
 });
 
-
 Handlebars.registerHelper('times', (n, options) => {
   'use strict';
   let accum = '';

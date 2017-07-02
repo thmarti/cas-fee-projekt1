@@ -2,7 +2,7 @@
   "name": "cas-fee-projekt1",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -21,7 +21,6 @@
     "express": "^4.12.4",
     "express-jwt": "^5.1.0",
     "jsonwebtoken": "^7.1.9",
-    "nedb": "^1.1.2",
-    "reload": "^1.1.7"
+    "nedb-promise": "^2.0.1"
   }
 }

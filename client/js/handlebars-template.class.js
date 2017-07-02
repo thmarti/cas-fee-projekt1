@@ -1,10 +1,8 @@
 import {Handlebars} from './lib.js';
 
 export default class HandlebarsTemplate {
-
   constructor(templateName) {
     this.path = 'templates/' + templateName + '.hbs';
-    this.templateName = templateName;
   }
 
   render(element, data) {
@@ -14,7 +12,7 @@ export default class HandlebarsTemplate {
       this.el = element;
     }
 
-    return this.getCompiledTemplate().then((template) => this.el.innerHTML = template(data));
+    return this.getCompiledTemplate().then(template => this.el.innerHTML = template(data));
   }
 
   getCompiledTemplate() {
