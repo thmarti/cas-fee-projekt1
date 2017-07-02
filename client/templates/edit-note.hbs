@@ -1,0 +1,31 @@
+<div class="form-group">
+    <label>Title</label>
+    {{input "note-title" this.title class="input-control"}}
+</div>
+
+<div class="form-group">
+    <label>Description</label>
+    {{textarea "note-description" this.description class="input-control" rows="8"}}
+</div>
+
+<div class="form-group">
+    <label>Importance</label>
+    <div class="importance-widget">
+        {{#times 5}}
+            <input id="importance{{this}}" type="radio" class="importance-radio" name="note-importance"
+                   data-importance="{{this}}" {{#ifCond ../importance '==' this}}checked{{/ifCond}}>
+            <label for="importance{{this}}" class="fa fa-star"></label>
+        {{/times}}
+    </div>
+</div>
+
+<div class="form-group">
+    <label>Due Date</label>
+    {{input "note-duedate" this.dueDateFormatted type="date" class="input-control"}}
+</div>
+
+<div class="form-group">
+    <label>&nbsp;</label>
+    <button id="save-detail">Save</button>
+    <button id="cancel-detail">Cancel</button>
+</div>

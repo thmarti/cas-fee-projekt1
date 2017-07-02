@@ -1,0 +1,56 @@
+@media screen and (max-width: 999px) {
+    .note-entry {
+        flex-direction: column;
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    .finished-section {
+        order: 1;
+    }
+
+    .note-section {
+        order: 2;
+    }
+
+    .edit-section {
+        order: 3;
+    }
+}
+
+.notes-list li {
+    border-top: 1px solid var(--front-color);
+}
+
+.finished-section {
+    flex-direction: column;
+    flex-grow: 1;
+    width: 8em;
+}
+
+.duedate-section {
+    margin-bottom: 1em;
+}
+
+.note-entry {
+    justify-content: space-between;
+    align-items: stretch;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+.note-section {
+    flex-direction: column;
+    flex-basis: 60%;
+    flex-grow: 2;
+}
+
+.note-header {
+    justify-content: space-between;
+    margin: 0 0 1em 0;
+}
+
+.edit-section {
+    flex-basis: 10%;
+    flex-grow: 0;
+}

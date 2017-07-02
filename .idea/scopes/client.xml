@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="client" pattern="file[cas-fee-projekt1]:client/*||file[cas-fee-projekt1]:client/css/*||file[cas-fee-projekt1]:client/js/*||file[cas-fee-projekt1]:client/templates/*" />
+</component>

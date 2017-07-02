@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="server" pattern="file[cas-fee-projekt1]:server/*" />
+</component>
